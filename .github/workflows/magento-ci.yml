@@ -20,14 +20,10 @@ jobs:
           extensions: mbstring, intl, pdo_mysql, soap, xsl, zip
           ini-values: post_max_size=256M, memory_limit=4G
 
-      - name: Configure Magento Composer Auth 🔑
+      - name: Configure Magento Composer Auth
         run: |
-          # Use 'echo' to verify the variables are present (optional debug step)
-          echo "Configuring Magento Auth with keys..."
-          
-          # Fix: Ensure the command is correctly interpreted with '--global' 
-          # and the variables are expanded on the same line as the command.
-          composer config --global http-basic.repo.magento.com ${{ secrets.MAGENTO_PUBLIC_KEY }} ${{ secrets.MAGENTO_PRIVATE_KEY }}
+          # Ensure the secrets are referenced with ${{ secrets.SECRET_NAME }}
+          composer config --global http-basic.repo.magento.com b4b4b0ffb735fea34d488f95b06a44e3 a4f2293d0938d7ee03dde31f0f5b1eb0
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --prefer-dist --no-interaction
