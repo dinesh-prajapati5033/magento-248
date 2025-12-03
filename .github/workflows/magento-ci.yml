@@ -23,7 +23,7 @@ jobs:
       - name: Configure Magento Composer Auth
         run: |
           # Ensure the secrets are referenced with ${{ secrets.SECRET_NAME }}
-          composer config http-basic.repo.magento.com "${{ secrets.MAGENTO_PUBLIC_KEY }}" "${{ secrets.MAGENTO_PRIVATE_KEY }}"
+          composer config --global http-basic.repo.magento.com "${{ secrets.MAGENTO_PUBLIC_KEY }}" "${{ secrets.MAGENTO_PRIVATE_KEY }}"
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --prefer-dist --no-interaction
