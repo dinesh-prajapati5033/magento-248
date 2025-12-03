@@ -32,7 +32,7 @@ jobs:
         run: php bin/magento setup:di:compile
 
       - name: Build Static Content
-        run: php bin/magento setup:static-content:deploy -f en_US
+        run: php bin/magento setup:static-content:deploy -f 
 
       - name: Magento Code Sniff
         run: |
