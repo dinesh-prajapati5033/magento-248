@@ -32,7 +32,8 @@ jobs:
         run: php bin/magento setup:di:compile
 
       - name: Build Static Content
-        run: php bin/magento setup:static-content:deploy -f 
+        - name: Build Static Content
+          run: php bin/magento setup:static-content:deploy -f --theme Magento/blank --theme Magento/luma en_US
 
       - name: Magento Code Sniff
         run: |
