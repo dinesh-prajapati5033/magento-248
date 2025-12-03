@@ -1,6 +1,14 @@
+name: Magento 2.4.8 CI
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build-magento:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -18,3 +26,17 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --prefer-dist --no-interaction
+
+      - name: DI Compile
+        run: php bin/magento setup:di:compile
+
+      - name: Build Static Content
+        run: php bin/magento setup:static-content:deploy -f en_US
+
+      - name: Magento Code Sniff
+        run: |
+          composer require magento/magento-coding-standard --dev
+          vendor/bin/phpcs --standard=Magento2 app/code || true
+
+      - name: PHPUnit Tests
+        run: php vendor/bin/phpunit || true
