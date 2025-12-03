@@ -1,13 +1,6 @@
-name: Magento 2.4.8 CI
-
-on:
-  push:
-    branches: ["main"]
-
 jobs:
   build-magento:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -21,22 +14,7 @@ jobs:
 
       - name: Configure Magento Composer Auth
         run: |
-          composer config -g http-basic.repo.magento.com ${{ secrets.MAGENTO_PUBLIC_KEY }} ${{ secrets.MAGENTO_PRIVATE_KEY }}
+          composer config http-basic.repo.magento.com ${{ secrets.MAGENTO_PUBLIC_KEY }} ${{ secrets.MAGENTO_PRIVATE_KEY }}
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --prefer-dist --no-interaction
-
-      - name: DI Compile
-        run: php bin/magento setup:di:compile
-
-      - name: Build Static Content
-        run: php bin/magento setup:static-content:deploy -f en_US
-
-      - name: Code Sniff (Magento Coding Standard)
-        run: |
-          composer require magento/magento-coding-standard --dev
-          vendor/bin/phpcs --standard=Magento2 app/code || true
-
-      - name: PHPUnit Tests (Optional)
-        run: |
-          php vendor/bin/phpunit || echo "PHPUnit not configured"
