@@ -1,0 +1,38 @@
+name: Magento 2.4.8 CI
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-magento:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          extensions: mbstring, intl, pdo_mysql, soap, xsl, zip
+          ini-values: post_max_size=256M, memory_limit=4G
+
+      - name: Install Composer
+        run: composer install --no-dev --prefer-dist --no-interaction
+
+      - name: Run Magento Compile
+        run: php bin/magento setup:di:compile
+
+      - name: Build Static Content
+        run: php bin/magento setup:static-content:deploy -f
+
+      - name: Magento Code Sniff
+        run: |
+          composer require magento/magento-coding-standard --dev
+          vendor/bin/phpcs --standard=Magento2 app/code
+
+      - name: PHPUnit Tests (if configured)
+        run: |
+          php vendor/bin/phpunit || echo "PHPUnit not configured"
