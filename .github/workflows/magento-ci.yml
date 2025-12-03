@@ -20,17 +20,10 @@ jobs:
           extensions: mbstring, intl, pdo_mysql, soap, xsl, zip
           ini-values: post_max_size=256M, memory_limit=4G
 
-       - name: Add Magento Authentication
+      - name: Configure Magento Composer Auth
         run: |
-          echo '{
-            "http-basic": {
-              "repo.magento.com": {
-                "username": "'"${{ secrets.MAGENTO_PUBLIC_KEY }}"'",
-                "password": "'"${{ secrets.MAGENTO_PRIVATE_KEY }}"'"
-              }
-            }
-          }' > ~/.composer/auth.json
-
+          # Ensure the secrets are referenced with ${{ secrets.SECRET_NAME }}
+          composer config http-basic.repo.magento.com "${{ secrets.MAGENTO_PUBLIC_KEY }}" "${{ secrets.MAGENTO_PRIVATE_KEY }}"
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --prefer-dist --no-interaction
