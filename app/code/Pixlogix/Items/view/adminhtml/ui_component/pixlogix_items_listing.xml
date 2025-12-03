@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="spinner" xsi:type="string">pixlogix_items_columns</item>
+        <item name="js_config" xsi:type="array">
+            <item name="deps" xsi:type="string">pixlogix_items_listing.pixlogix_items_listing_data_source</item>
+            <item name="provider" xsi:type="string">pixlogix_items_listing.pixlogix_items_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New Items</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="pixlogix_items_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">pixlogix_items_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">item_id</argument>
+            <argument name="requestFieldName" xsi:type="string">item_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">item_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <!-- Toolbar -->
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <columnsControls name="columns_controls"/>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">pixlogix_items_listing.pixlogix_items_listing.pixlogix_items_columns.ids</item>
+                    <item name="indexField" xsi:type="string">item_id</item>
+                </item>
+            </argument>
+            <action name="enable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">enable</item>
+                        <item name="label" xsi:type="string" translate="true">Enable</item>
+                        <item name="url" xsi:type="url" path="*/*/massAction">
+                            <param name="status">1</param>
+                        </item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="name" xsi:type="string" translate="true">Enable items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to enable selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>  
+            <action name="disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                         <item name="url" xsi:type="url" path="*/*/massAction">
+                             <param name="status">0</param>
+                         </item>
+                        <item name="type" xsi:type="string">reject</item>
+                        <item name="label" xsi:type="string" translate="true">Disables</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="name" xsi:type="string" translate="true">Disable items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to disable selected items?</item>
+                        </item>
+                    </item>
+                </argument>            
+            </action>
+        </massaction>
+    </listingToolbar>
+
+    <!-- Columns -->
+    <columns name="pixlogix_items_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">item_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+
+        <column name="item_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="image" class="Pixlogix\Items\Ui\Component\Listing\Column\Thumbnail">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="has_preview" xsi:type="string">1</item>                    
+                    <item name="label" xsi:type="string" translate="true">Image</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="url_key">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Key</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="status" class="Magento\Ui\Component\Listing\Columns\Column">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Pixlogix\Items\Ui\Component\Listing\Column\StatusOptions</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" translate="true" xsi:type="string">Status</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="store_ids" class="Pixlogix\Items\Ui\Component\Listing\Column\StoreView">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Store\Ui\Component\Listing\Column\Store\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="customer_group_ids" class="Pixlogix\Items\Ui\Component\Listing\Column\CustomerGroup">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Customer\Model\ResourceModel\Group\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Group</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Created</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Updated</item>
+                </item>
+            </argument>
+        </column>
+
+        <actionsColumn name="actions" class="Pixlogix\Items\Ui\Component\Listing\Column\ItemActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">item_id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

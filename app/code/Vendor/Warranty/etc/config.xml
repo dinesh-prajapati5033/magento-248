@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Vendor
+ * @package   Vendor_Warranty
+ * @author    Vendor
+ * @copyright Copyright (c) 2025 Vendor
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
+    <default>
+        <warranty>
+            <general>
+                <pending_expiry_days>90</pending_expiry_days>
+            </general>
+        </warranty>
+    </default>
+</config>

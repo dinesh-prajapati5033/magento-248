@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+    @category  Pixlogix
+    @package   Pixlogix_Items
+    @description Layout XML for listing page.
+    Adds item listing block to 'content' container.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Pixlogix_Items::css/source/_module.less"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Pixlogix\Items\Block\Item\ListBlock"
+                   name="pixlogix_items_list"
+                   template="Pixlogix_Items::item/list.phtml" />
+        </referenceContainer>
+    </body>
+</page>

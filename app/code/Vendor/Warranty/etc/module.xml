@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module declaration file
+ *
+ * Defines the module name and setup version for Magento.
+ *
+ * @category  Vendor
+ * @package   Vendor_Warranty
+ * @author    Vendor
+ * @copyright Copyright (c) 2025 Vendor
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Vendor_Warranty" setup_version="1.0.1">
+        <sequence>
+            <module name="Magento_Sales"/>
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ *
+ * Frontend Template — Item Detail Page
+ */
+?>
+<?php $item = $block->getItem(); ?>
+
+<?php if ($block->isModuleEnabled()): ?>
+    <?php $width = (int)$block->getDetailImageWidth(); ?>
+    <?php $height = (int)$block->getDetailImageHeight(); ?>
+
+    <?php if ($item): ?>
+        <div class="pixlogix-item-view">
+            <div class="pixlogix-item-image">
+                <img src="<?= $escaper->escapeUrl($block->getImageUrl($item->getImage())) ?>"
+                    width="<?= (int)$width ?>"
+                    height="<?= (int)$height ?>"
+                    alt="<?= $escaper->escapeHtmlAttr($item->getTitle()) ?>" />
+            </div>
+
+            <!-- Display Item Title -->
+            <h1 class="pixlogix-item-title">
+                <!-- Added "Title:" label before dynamic title -->
+                <strong><?= $escaper->escapeHtml(__('Title:')) ?></strong>
+                <?= $escaper->escapeHtml($item->getTitle()) ?>
+            </h1>
+
+            <?php if ($item->getContent()): ?>
+                <div class="pixlogix-item-content">
+                    <!-- Added "Description:" label before dynamic content -->
+                    <strong><?= $escaper->escapeHtml(__('Description:')) ?></strong>
+                    <?= /* @noEscape */ $block->getProcessedContent($item->getContent()) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php else: ?>
+        <p><?= $escaper->escapeHtml(__('Item not found.')) ?></p>
+    <?php endif; ?>
+<?php else: ?>
+    <p><?= $escaper->escapeHtml(__('Module is disabled.')) ?></p>
+<?php endif; ?>

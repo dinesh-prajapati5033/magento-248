@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+return [
+    'db-host' => 'localhost',
+    'db-user' => 'root',
+    'db-password' => 'admin@123',
+    'db-name' => 'magento_integration_tests',
+    'db-prefix' => '',
+    'backend-frontname' => 'admin',
+    'search-engine' => 'opensearch',
+    'opensearch-host' => 'localhost',
+    'opensearch-port' => 9200,
+    'admin-user' => 'admin',
+    'admin-password' => 'admin123',
+    'admin-email' => 'admin@gmail.com',
+    'admin-firstname' => 'admin',
+    'admin-lastname' => 'admin',
+    'consumers-wait-for-messages' => '0',
+    'use-secure-admin' => 0
+];

@@ -1,0 +1,215 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">pixlogix_items_form.pixlogix_items_form_data_source</item>
+            <item name="deps" xsi:type="string">pixlogix_items_form.pixlogix_items_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Item Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Pixlogix\Items\Block\Adminhtml\Item\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Pixlogix\Items\Block\Adminhtml\Item\Edit\DeleteButton</item>
+            <item name="save_and_continue" xsi:type="string">Pixlogix\Items\Block\Adminhtml\Item\Edit\SaveAndContinueButton</item>
+            <item name="save" xsi:type="string">Pixlogix\Items\Block\Adminhtml\Item\Edit\SaveButton</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">pixlogix_items_form</item>
+        </item>
+    </argument>
+
+    <dataSource name="pixlogix_items_form_data_source">
+         <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Pixlogix\Items\Model\DataProvider</argument>
+            <argument name="name" xsi:type="string">pixlogix_items_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">item_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Item Information</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <!-- Title -->
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- URL Key -->
+        <field name="url_key">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">URL Key</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">url_key</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-identifier" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- Store View -->
+        <field name="store_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Store\Ui\Component\Listing\Column\Store\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/multiselect</item>
+                    <item name="dataScope" xsi:type="string">store_ids</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- Customer Group -->
+        <field name="customer_group_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Customer\Model\ResourceModel\Group\Collection</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Customer Group</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/multiselect</item>
+                    <item name="dataScope" xsi:type="string">customer_group_ids</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <!-- Image -->
+        <field name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="source" xsi:type="string">image</item>
+                    <item name="label" xsi:type="string" translate="true">Image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="previewTmpl" xsi:type="string">Pixlogix_Items/image-preview</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                   <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="pixlogix_items/item_fileUploader/save"/>
+                    </item>
+                </item>
+            </argument>
+          </field>
+
+        <!-- Short Description -->
+        <field name="short_content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Short Description</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="dataScope" xsi:type="string">short_content</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <!-- Enable Magento WYSIWYG / Page Builder -->
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_variables" xsi:type="boolean">false</item>
+                        <item name="add_widgets" xsi:type="boolean">false</item>
+                        <item name="add_images" xsi:type="boolean">false</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                         <item name="height" xsi:type="string">200px</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- Full Description -->
+        <field name="content" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">content</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <!-- Enable Magento WYSIWYG / Page Builder -->
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_variables" xsi:type="boolean">false</item>
+                        <item name="add_widgets" xsi:type="boolean">false</item>
+                        <item name="add_images" xsi:type="boolean">false</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                         <item name="height" xsi:type="string">200px</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+
+        <!-- Status -->
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Pixlogix\Items\Ui\Component\Listing\Column\StatusOptions</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/select</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

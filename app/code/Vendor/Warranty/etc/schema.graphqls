@@ -1,0 +1,83 @@
+type Query {
+    warrantyRegistration(id: ID!): WarrantyRegistration 
+        @resolver(class: "Vendor\\Warranty\\Model\\GraphQL\\Resolver\\WarrantyRegistration")
+        @magentoAcl(resource: "Vendor_Warranty::registrations")
+        @cache(cacheIdentity: "Vendor\\Warranty\\Model\\GraphQL\\Resolver\\WarrantyRegistrationIdentity")
+        @doc(description: "Fetch a single warranty registration by its unique ID. Accessible only to authorized users.")
+
+    warrantyRegistrations(
+        filter: WarrantyRegistrationFilterInput,
+        pageSize: Int = 20,
+        currentPage: Int = 1,
+        sort: WarrantyRegistrationSortInput
+    ): WarrantyRegistrationPage 
+        @resolver(class: "Vendor\\Warranty\\Model\\GraphQL\\Resolver\\WarrantyRegistrationList")
+        @cache(cacheIdentity: "Vendor\\Warranty\\Model\\GraphQL\\Resolver\\WarrantyRegistrationIdentity")
+        @doc(description: "Retrieve a paginated list of warranty registrations with optional filters and sorting.")
+}
+
+type WarrantyRegistration {
+    registration_id: ID! @doc(description: "Unique identifier for the warranty registration record.")
+    customer_id: Int @doc(description: "ID of the customer who created the registration.")
+    product_sku: String! @doc(description: "SKU of the registered product.")
+    serial_number: String! @doc(description: "Serial number of the registered product.")
+    purchase_date: String! @doc(description: "Date when the product was purchased (Y-m-d format).")
+    order_id: String @doc(description: "Associated sales order ID, if provided by the customer.")
+    proof_url: String @doc(description: "URL pointing to proof of purchase (invoice or receipt).")
+    status: Int! @doc(description: "Registration status: 0 = Pending, 1 = Approved, 2 = Rejected.")
+    created_at: String @doc(description: "Date and time when the registration was created.")
+    updated_at: String @doc(description: "Date and time when the registration was last updated.")
+}
+
+input WarrantyRegistrationFilterInput {
+    status: Int @doc(description: "Filter by registration status (e.g., 0 for pending).")
+    product_sku: String @doc(description: "Filter registrations by product SKU.")
+    serial_number: String @doc(description: "Filter registrations by serial number.")
+}
+
+input WarrantyRegistrationSortInput {
+    field: String! @doc(description: "Field to sort by, e.g., 'created_at' or 'product_sku'.")
+    direction: SortDirectionEnum! @doc(description: "Sorting direction, either ASC or DESC.")
+}
+
+enum SortDirectionEnum {
+    ASC @doc(description: "Sort results in ascending order.")
+    DESC @doc(description: "Sort results in descending order.")
+}
+
+type WarrantyRegistrationPage {
+    items: [WarrantyRegistration!]! @doc(description: "List of warranty registration records for the current page.")
+    total_count: Int! @doc(description: "Total number of records matching the query.")
+    page_info: PageInfo! @doc(description: "Pagination information such as page size and total pages.")
+}
+
+type PageInfo {
+    page_size: Int! @doc(description: "Number of items per page.")
+    current_page: Int! @doc(description: "Current page number being viewed.")
+    total_pages: Int! @doc(description: "Total number of available pages.")
+}
+
+type Mutation {
+    createWarrantyRegistration(input: CreateWarrantyRegistrationInput!): WarrantyRegistration! 
+        @resolver(class: "Vendor\\Warranty\\Model\\GraphQL\\Resolver\\CreateWarrantyRegistration")
+        @doc(description: "Create a new warranty registration for the logged-in customer. Requires product_sku, serial_number, and purchase_date.")
+
+    updateWarrantyRegistration(input: UpdateWarrantyRegistrationInput!): WarrantyRegistration! 
+        @resolver(class: "Vendor\\Warranty\\Model\\GraphQL\\Resolver\\UpdateWarrantyRegistration")
+        @doc(description: "Update an existing warranty registration if it is still pending and belongs to the current customer.")
+}
+
+input CreateWarrantyRegistrationInput {
+    product_sku: String! @doc(description: "Product SKU to register. Must exist in the catalog.")
+    serial_number: String! @doc(description: "Unique serial number of the product.")
+    purchase_date: String! @doc(description: "Purchase date in Y-m-d format.")
+    order_id: Int @doc(description: "Optional sales order ID. Must belong to the current customer if provided.")
+    proof_url: String @doc(description: "Optional URL link to proof of purchase.")
+}
+
+input UpdateWarrantyRegistrationInput {
+    registration_id: Int! @doc(description: "ID of the warranty registration record to update.")
+    product_sku: String @doc(description: "Updated product SKU. Must exist in catalog if changed.")
+    serial_number: String @doc(description: "Updated product serial number.")
+    proof_url: String @doc(description: "Updated proof of purchase URL.")
+}

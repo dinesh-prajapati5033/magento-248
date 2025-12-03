@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Connect UI Component DataProvider to our Collection -->
+    <virtualType name="Pixlogix\Items\Model\ResourceModel\Item\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">pixlogix_items</argument>
+            <argument name="resourceModel" xsi:type="string">Pixlogix\Items\Model\ResourceModel\Item</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="pixlogix_items_listing_data_source" xsi:type="string">
+                    Pixlogix\Items\Model\ResourceModel\Item\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+   <!-- Virtual type for image uploader -->
+    <virtualType name="Pixlogix\Items\ItemImageUpload" type="Pixlogix\Items\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">pixlogix/items</argument>
+            <argument name="basePath" xsi:type="string">items</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Inject virtual type into file uploader controller -->
+    <type name="Pixlogix\Items\Controller\Adminhtml\Item\FileUploader\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Pixlogix\Items\ItemImageUpload</argument>
+        </arguments>
+    </type>
+
+</config>

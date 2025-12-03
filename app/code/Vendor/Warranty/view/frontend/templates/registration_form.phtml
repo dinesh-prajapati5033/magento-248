@@ -1,0 +1,32 @@
+<form action="<?= $escaper->escapeUrl($block->getFormAction()); ?>" method="post" class="warranty-registration-form">
+    <?= $block->getBlockHtml('formkey'); ?>
+
+    <div class="form-group">
+        <label for="product_sku"><?= $escaper->escapeHtml(__('Product SKU')) ?></label>
+        <input type="text" name="product_sku" id="product_sku" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="serial_number"><?= $escaper->escapeHtml(__('Serial Number')) ?></label>
+        <input type="text" name="serial_number" id="serial_number" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="purchase_date"><?= $escaper->escapeHtml(__('Purchase Date')) ?></label>
+        <input type="date" name="purchase_date" id="purchase_date" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="order_id"><?= $escaper->escapeHtml(__('Order Number (optional)')) ?></label>
+        <input type="text" name="order_id" id="order_id" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="proof_url"><?= $escaper->escapeHtml(__('Proof URL')) ?></label>
+        <input type="url" name="proof_url" id="proof_url" class="form-control">
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="action submit primary"><?= $escaper->escapeHtml(__('Submit Registration')) ?></button>
+    </div>
+</form>

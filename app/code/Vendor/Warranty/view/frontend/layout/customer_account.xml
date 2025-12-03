@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Vendor
+ * @package   Vendor_Warranty
+ * @author    Vendor
+ * @copyright Copyright (c) 2025 Vendor
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Add Warranty Registration link in the customer account menu -->
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-warranty">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Warranty Registration</argument>
+                    <argument name="path" xsi:type="string">warranty/registration/formRegistration</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

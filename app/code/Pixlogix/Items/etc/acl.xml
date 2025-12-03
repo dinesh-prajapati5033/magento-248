@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+
+    <acl>
+        <resources>
+            <!-- Main Admin Panel -->
+            <resource id="Magento_Backend::admin">
+                
+                <!-- Stores > Configuration -->
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Pixlogix_Items::config"
+                                      title="Pixlogix Items Configuration"
+                                      sortOrder="90"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <!-- Pixlogix Items Section -->
+                <resource id="Pixlogix_Items::items"
+                          title="Pixlogix Items"
+                          sortOrder="90">
+
+                    <!-- Child permissions for CRUD operations -->
+                    <resource id="Pixlogix_Items::save"
+                              title="View Items"
+                              sortOrder="10"/>
+                    <resource id="Pixlogix_Items::delete"
+                              title="Delete Item"
+                              sortOrder="40"/>
+                </resource>
+
+            </resource>
+        </resources>
+    </acl>
+</config>

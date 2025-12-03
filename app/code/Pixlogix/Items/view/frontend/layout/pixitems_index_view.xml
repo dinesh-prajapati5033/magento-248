@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Pixlogix_Items::css/source/_module.less"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Pixlogix\Items\Block\Item\View" name="pixitems.view" template="Pixlogix_Items::item/view.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

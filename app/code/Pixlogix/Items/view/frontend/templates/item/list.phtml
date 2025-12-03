@@ -1,0 +1,60 @@
+<?php
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ *
+ * Frontend Template — Item Listing (3 per row layout)
+ */
+?>
+
+<?php if ($block->isModuleEnabled()): ?>
+    <?php $items = $block->getItems(); ?>
+    <?php $width = $block->getListImageWidth(); ?>
+    <?php $height = $block->getListImageHeight(); ?>
+
+    <?php if ($items->getSize()): ?>
+        <!-- Items Grid Wrapper -->
+        <div class="pixlogix-items-grid">
+            <?php foreach ($items as $item): ?>
+                <div class="pixlogix-item-card">
+                    <a href="<?= $escaper->escapeUrl($block->getUrl('pixitems/' . $item->getUrlKey())) ?>">
+                        <img src="<?= $escaper->escapeUrl($block->getImageUrl($item->getImage())) ?>"
+                             width="<?= (int)$width ?>"
+                             height="<?= (int)$height ?>"
+                             alt="<?= $escaper->escapeHtmlAttr($item->getTitle()) ?>"
+                             class="pixlogix-item-img" />
+                    </a>
+
+                   <h2 class="pixlogix-item-title">
+                        <!-- Added "Title:" label before dynamic title -->
+                        <strong><?= $escaper->escapeHtml(__('Title:')) ?></strong>
+                        <a href="<?= $escaper->escapeUrl($block->getUrl('pixitems/' . $item->getUrlKey())) ?>">
+                            <?= $escaper->escapeHtml($item->getTitle()) ?>
+                        </a>
+                    </h2>
+
+                    <?php if ($item->getShortContent()): ?>
+                        <div class="pixlogix-item-short">
+                            <!-- Added "Description:" label before dynamic short description -->
+                            <strong><?= $escaper->escapeHtml(__('Description:')) ?></strong>
+                            <?= /* @noEscape */ $block->getProcessedContent($item->getShortContent()) ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <a href="<?= $escaper->escapeUrl($block->getUrl('pixitems/' . $item->getUrlKey())) ?>"
+                       class="pixlogix-item-readmore">
+                        <?= $escaper->escapeHtml(__('Read More')) ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="pixlogix-pager">
+            <?= /* phpcs:ignore Magento2.Functions.DiscouragedFunction */ $block->getPagerHtml(); ?>
+        </div>
+    <?php else: ?>
+        <p><?= $escaper->escapeHtml(__('No items found.')) ?></p>
+    <?php endif; ?>
+<?php endif; ?>

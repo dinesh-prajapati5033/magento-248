@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Vendor
+ * @package   Vendor_Warranty
+ * @author    Vendor
+ * @copyright Copyright (c) 2025 Vendor
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/crontab.xsd">
+    <group id="default">
+        <job name="vendor_warranty_reject_pending" instance="Vendor\Warranty\Cron\RejectPendingRegistrations" method="execute">
+            <schedule>* * * * *</schedule> <!-- Every day at midnight -->
+        </job>
+    </group>
+</config>

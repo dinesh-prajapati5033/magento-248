@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Warranty Registration Single Query Resolver -->
+    <type name="Vendor\Warranty\Model\GraphQL\Resolver\WarrantyRegistration">
+        <arguments>
+            <argument name="repository" xsi:type="object">Vendor\Warranty\Api\WarrantyRegistrationRepositoryInterface</argument>
+            <argument name="identity" xsi:type="object">Vendor\Warranty\Model\GraphQL\Resolver\WarrantyRegistrationIdentity</argument>
+        </arguments>
+    </type>
+
+    <!-- Warranty Registration List Query Resolver -->
+    <type name="Vendor\Warranty\Model\GraphQL\Resolver\WarrantyRegistrationList">
+        <arguments>
+            <argument name="repository" xsi:type="object">Vendor\Warranty\Api\WarrantyRegistrationRepositoryInterface</argument>
+            <argument name="identity" xsi:type="object">Vendor\Warranty\Model\GraphQL\Resolver\WarrantyRegistrationIdentity</argument>
+        </arguments>
+    </type>
+</config>

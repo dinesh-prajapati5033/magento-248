@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="pixlogix_items" resource="default" engine="innodb" comment="Pixlogix Items Table">
+
+        <column xsi:type="int" name="item_id" nullable="false" identity="true" unsigned="true" comment="Item ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Item Title"/>
+        <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image Path"/>
+        <column xsi:type="text" name="short_content" nullable="true" comment="Short Description"/>
+        <column xsi:type="text" name="content" nullable="true" comment="Full Description"/>
+        <column xsi:type="smallint" name="status" nullable="false" default="1" comment="Status (1=Enabled,0=Disabled)"/>
+        <column xsi:type="varchar" name="store_ids" nullable="true" length="255" comment="Store IDs"/>
+        <column xsi:type="varchar" name="customer_group_ids" nullable="true" length="255" comment="Customer Group IDs"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="item_id"/>
+        </constraint>
+
+        <constraint xsi:type="unique" referenceId="PIXLOGIX_ITEMS_URL_KEY_UNIQUE">
+            <column name="url_key"/>
+        </constraint>
+
+        <index referenceId="PIXLOGIX_ITEMS_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+
+    </table>
+
+</schema>

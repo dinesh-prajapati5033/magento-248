@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Pixlogix
+ * @package   Pixlogix_Items
+ * @author    Pixlogix
+ * @copyright Copyright (c) 2025 Pixlogix
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+
+    <!-- Main menu item -->
+    <menu>
+        <add id="Pixlogix_Items::main_menu"
+             title="Pixlogix"
+             module="Pixlogix_Items"
+             sortOrder="40"
+             resource="Pixlogix_Items::items"/>
+
+        <!-- Submenu: Manage Items -->
+        <add id="Pixlogix_Items::items"
+             title="Manage Items"
+             module="Pixlogix_Items"
+             sortOrder="10"
+             parent="Pixlogix_Items::main_menu"
+             action="pixlogix_items/item/index"
+             resource="Pixlogix_Items::items"/>
+    </menu>
+</config>

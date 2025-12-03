@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Vendor
+ * @package   Vendor_Warranty
+ * @author    Vendor
+ * @copyright Copyright (c) 2025 Vendor
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework/Event/etc/events.xsd">
+    <event name="vendor_warranty_approved">
+        <observer name="vendor_warranty_approved_observer"
+                  instance="Vendor\Warranty\Observer\WarrantyApprovedObserver" />
+    </event>
+</config>

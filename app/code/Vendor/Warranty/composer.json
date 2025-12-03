@@ -1,0 +1,15 @@
+{
+  "name": "vendor/module-warranty",
+  "description": "Vendor Warranty Module - Product Warranty Registration",
+  "type": "magento2-module",
+  "license": ["OSL-3.0", "AFL-3.0"],
+  "require": {
+    "php": "^8.2 || ^8.3 || ^8.4"
+  },
+  "autoload": {
+    "files": ["registration.php"],
+    "psr-4": {
+      "Vendor\\Warranty\\": ""
+    }
+  }
+}

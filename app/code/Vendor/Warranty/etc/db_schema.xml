@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Declarative Schema for the Vendor Warranty Registration module.
+ * Defines the database table structure for storing warranty registration records.
+ *
+ * @category  Vendor
+ * @package   Vendor_Warranty
+ * @author    Vendor
+ * @copyright Copyright (c) 2025 Vendor
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="vendor_warranty_registration"
+           resource="default"
+           engine="innodb"
+           comment="Vendor Product Warranty Registrations">
+
+        <column xsi:type="int" name="registration_id" unsigned="true" nullable="false" identity="true" comment="Registration ID (PK)"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" comment="Customer ID (NULL for guests)"/>
+        <column xsi:type="varchar" name="order_id" length="50" nullable="true" comment="Order ID associated with the purchase (optional)"/>
+        <column xsi:type="varchar" name="product_sku" length="64" nullable="false" comment="Product SKU (64 chars max)"/>
+        <column xsi:type="varchar" name="serial_number" length="64" nullable="false" comment="Product Serial Number"/>
+        <column xsi:type="date" name="purchase_date" nullable="false" comment="Date of Purchase"/>
+        <column xsi:type="varchar" name="proof_url" length="255" nullable="true" comment="URL to proof of purchase document"/>
+        <column xsi:type="smallint" name="status" nullable="false" default="0" comment="Registration Status: 0=pending, 1=approved, 2=rejected"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Update Time"/>
+
+        <!-- Primary Key -->
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="registration_id"/>
+        </constraint>
+
+        <!-- Indexes for efficient GraphQL filters -->
+        <index referenceId="VENDOR_WARRANTY_REGISTRATION_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="VENDOR_WARRANTY_REGISTRATION_PRODUCT_SKU" indexType="btree">
+            <column name="product_sku"/>
+        </index>
+        <index referenceId="VENDOR_WARRANTY_REGISTRATION_SERIAL_NUMBER" indexType="btree">
+            <column name="serial_number"/>
+        </index>
+
+        <!-- Indexes for foreign-key-based lookups -->
+        <index referenceId="VENDOR_WARRANTY_REGISTRATION_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+        <index referenceId="VENDOR_WARRANTY_REGISTRATION_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+
+        <!-- Unique constraint -->
+        <constraint xsi:type="unique" referenceId="VENDOR_WARRANTY_REGISTRATION_SERIAL_NUMBER_SKU">
+            <column name="serial_number"/>
+            <column name="product_sku"/>
+        </constraint>
+
+    </table>
+</schema>
