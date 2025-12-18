@@ -385,6 +385,7 @@ return [
         'PayPal_BraintreeGraphQl' => 1,
         'PayPal_BraintreeReward' => 1,
         'Pixlogix_Items' => 1,
+        'Swanhill_CategoryFaq' => 1,
         'Vendor_Warranty' => 1
     ]
 ];

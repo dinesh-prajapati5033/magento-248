@@ -1,0 +1,77 @@
+<?php
+/** @var \Dinesh\CategoryFaq\Block\CategoryFaq $block */
+
+if (!$block->isEnabled()) {
+    return;
+}
+
+$faqHtml = $block->getCategoryFaqContent();
+if (!trim($faqHtml)) {
+    return;
+}
+?>
+<div class="category-faq">
+    <div class="category-faq-content js-faq-accordion">
+        <?= /* @noEscape */ $faqHtml ?>
+    </div>
+</div>
+
+<!-- CSS (inline) -->
+<style>
+.category-faq-content h3 {
+    cursor: pointer;
+    position: relative;
+    padding-right: 30px;
+    margin-bottom: 10px;
+}
+
+.category-faq-content h3::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+}
+
+.category-faq-content h3.active::after {
+    content: "-";
+}
+
+.category-faq-content p {
+    display: none;
+    margin-bottom: 15px;
+}
+
+/* RTL support */
+html[dir="rtl"] .category-faq-content h3 {
+    padding-right: 0;
+    padding-left: 30px;
+}
+
+html[dir="rtl"] .category-faq-content h3::after {
+    right: auto;
+    left: 0;
+}
+</style>
+
+<!-- JS (inline, Magento-safe) -->
+<script>
+require(['jquery'], function ($) {
+    $(document).ready(function () {
+        $('.js-faq-accordion h3').on('click', function () {
+            var $this = $(this);
+
+            $this
+                .toggleClass('active')
+                .next('p')
+                .slideToggle();
+
+            $this
+                .siblings('h3')
+                .removeClass('active')
+                .next('p')
+                .slideUp();
+        });
+    });
+});
+</script>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category  Dinesh
+ * @package   Dinesh_CategoryFaq
+ * @author    Dinesh
+ * @copyright Copyright (c) 2025 Dinesh
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="faq_fieldset" sortOrder="100">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">FAQ Content</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        
+        <field name="category_faq_enabled" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_faq_enabled</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable FAQ</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="category_faq_content" template="ui/form/field" sortOrder="50" formElement="wysiwyg">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_variables" xsi:type="boolean">false</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                         <item name="height" xsi:type="string">200px</item>
+                    </item>
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">FAQ Content</label>
+                <notice translate="true">Note: Keyboard shortcut to activate editor help : Alt + 0 (Windows) or &#x2325;0 (MacOS)</notice>
+                <dataScope>category_faq_content</dataScope>
+            </settings>
+            <formElements>
+                <wysiwyg class="Magento\Catalog\Ui\Component\Category\Form\Element\Wysiwyg">
+                    <settings>
+                        <rows>8</rows>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
